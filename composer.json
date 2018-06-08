@@ -1,0 +1,33 @@
+{
+    "name": "lidelin/ding-error-notifier",
+    "description": "ding chat error notifier for laravel",
+    "keywords": [
+        "ding chat",
+        "error notifier",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "lidelin",
+            "email": "lidelin1023@qq.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "^5.5",
+        "wangju/ding-notice": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LDL\\DingErrorNotifier\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LDL\\DingErrorNotifier\\DingErrorNotifierServiceProvider"
+            ]
+        }
+    }
+}
