@@ -11,7 +11,7 @@ class DingRobotHandler extends AbstractProcessingHandler
     {
         $dingChannel = config('ding.error-notifier');
         if ($dingChannel) {
-            ding()->with('error-notifier')->text(json_encode($record));
+            ding()->with('error-notifier')->text(json_encode($record, JSON_UNESCAPED_UNICODE));
         }
     }
 }
