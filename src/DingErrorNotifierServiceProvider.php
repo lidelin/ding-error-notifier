@@ -18,7 +18,9 @@ class DingErrorNotifierServiceProvider extends ServiceProvider
     {
         $monolog = Log::getMonolog();
 
-        $handler = new DingRobotHandler();
+        $logLevel = $monolog::toMonologLevel(config('app.log_level'));
+
+        $handler = new DingRobotHandler($logLevel);
         $handler->pushProcessor(new MemoryUsageProcessor());
         $handler->pushProcessor(new WebProcessor());
 
