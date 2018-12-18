@@ -3,9 +3,9 @@
 namespace LDL\DingErrorNotifier;
 
 use Illuminate\Support\ServiceProvider;
-use Log;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\WebProcessor;
+use Monolog\Logger;
 
 class DingErrorNotifierServiceProvider extends ServiceProvider
 {
@@ -16,9 +16,11 @@ class DingErrorNotifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $monolog = Log::getMonolog();
+        $monolog = new Logger(config('logging.default'));
 
-        $logLevel = $monolog::toMonologLevel(config('app.log_level'));
+        $level = config('logging.channels')[config('logging.default')]['level'] ?? 'debug';
+
+        $logLevel = $monolog::toMonologLevel($level);
 
         $handler = new DingRobotHandler($logLevel);
         $handler->pushProcessor(new MemoryUsageProcessor());
