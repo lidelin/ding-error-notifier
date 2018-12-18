@@ -1,8 +1,11 @@
 # Ding Error Notifier
 
+# 说明
+**此包来源于 [lidelin/ding-error-notifier](https://github.com/lidelin/ding-error-notifier)**
+
 ## Requirements
-- PHP 7.0+
-- Laravel 5.5+
+- PHP 7.1.3+
+- Laravel 5.6+
 
 # Installation
 
