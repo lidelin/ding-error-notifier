@@ -26,7 +26,7 @@ class DingErrorNotifierServiceProvider extends ServiceProvider
         $handler->pushProcessor(new MemoryUsageProcessor());
         $handler->pushProcessor(new WebProcessor());
 
-        $monolog->pushHandler($handler);
+        $this->app['log']->pushHandler($handler);
     }
 
     /**
