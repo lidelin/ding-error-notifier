@@ -33,3 +33,36 @@ return [
     ],
 ];
 ```
+
+4. publish config/notifier.php
+```bash
+php artisan vendor:publish --provider="LDL\DingErrorNotifier\DingErrorNotifierServiceProvider"
+```
+
+5. modify config/notifier.php
+```php
+<?php
+
+return [
+    /*
+    |--------------------------------------------------------------------------
+    | notifier name
+    |--------------------------------------------------------------------------
+    */
+    'name' => env('NOTIFIER_NAME', 'ding'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | error notify level
+    |--------------------------------------------------------------------------
+    */
+    'level' => env('NOTIFIER_LEVEL', 'error'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | ding channel, you can config in ding.php
+    |--------------------------------------------------------------------------
+    */
+    'ding_channel' => env('NOTIFIER_DING_CHANNEL', 'error-notifier'),
+];
+```

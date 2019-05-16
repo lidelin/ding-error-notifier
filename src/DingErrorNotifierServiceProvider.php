@@ -2,10 +2,10 @@
 
 namespace LDL\DingErrorNotifier;
 
-use Illuminate\Support\ServiceProvider;
-use Monolog\Processor\MemoryUsageProcessor;
-use Monolog\Processor\WebProcessor;
 use Monolog\Logger;
+use Monolog\Processor\WebProcessor;
+use Monolog\Processor\MemoryUsageProcessor;
+use Illuminate\Support\ServiceProvider;
 
 class DingErrorNotifierServiceProvider extends ServiceProvider
 {
@@ -16,11 +16,14 @@ class DingErrorNotifierServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $monolog = new Logger(config('logging.default'));
+        $this->mergeConfigFrom(realpath(__DIR__ . '/../config/notifier.php'), 'notifier');
+        $this->publishes([
+            realpath(__DIR__ . '/../config/notifier.php') => config_path('notifier.php'),
+        ], 'config');
 
-        $level = config('logging.channels')[config('logging.default')]['level'] ?? 'debug';
+        $monolog = new Logger(config('notifier.name'));
 
-        $logLevel = $monolog::toMonologLevel($level);
+        $logLevel = $monolog::toMonologLevel(config('notifier.level'));
 
         $handler = new DingRobotHandler($logLevel);
         $handler->pushProcessor(new MemoryUsageProcessor());
