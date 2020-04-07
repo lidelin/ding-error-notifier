@@ -7,7 +7,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 
 class DingRobotHandler extends AbstractProcessingHandler
 {
-    protected function write(array $record)
+    protected function write(array $record): void
     {
         $channelName = config('notifier.ding_channel');
         $dingChannel = config("ding.{$channelName}");
